@@ -48,4 +48,45 @@ async todospedidodetalle({ response }) {
     return response.json({ error: error.message })
   }
 }
+async mostrarPedidoDetalleCampo({ response }) {
+    try {
+      const resultado = await pedidoService.mostrarpedidodetallecampoespecifico()
+      return response.json(resultado)
+    } catch (error) {
+      console.log(error) 
+      return response.json({ mensaje: 'Error al obtener los pedidos con detalles' })
+    }
+  }
+  async mostrarpedidodetallecampoespecificoid({ params, response }) {
+  try {
+    const resultado = await pedidoService.mostrarpedidodetallecampoespecificoid(params.id)
+    return response.json(resultado)
+  } catch (error) {
+    return response.json({ mensaje: 'Error al obtener el pedido con detalles' })
+  }
+}
+async mostrarPedidosConDetallesEspecificos({ response }) {
+  try {
+    const pedidos = await pedidoService.mostrarPedidosConDetallesEspecificos()
+    return response.json(pedidos)
+  } catch (error) {
+    return response.json({ mensaje: 'Error al obtener los pedidos filtrados' })
+  }
+}
+async listarPedidos({ response }) {
+  try {
+    const pedidos = await pedidoService.todopedido()
+    response.json(pedidos)
+  } catch (error) {
+    response.json({ mensaje: 'Error al listar los pedidos' })
+  }
+}
+async traerNombreCliente({ response }) {
+    try {
+      const data = await pedidoService.traerNombreCliente()
+      return response.json(data)
+    } catch (error) {
+      return response.json({ error: 'Error al traer los nombres de cliente' })
+    }
+  }
 }
